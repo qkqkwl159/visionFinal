@@ -46,5 +46,6 @@ except IndexError:
 
 disparity = getDisparity(imgLeft, imgRight, method)
 cv2.imshow("disparity", disparity)
+cv2.imwrite("parameter_disp.png",disparity)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
