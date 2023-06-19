@@ -157,8 +157,9 @@ def get_disparity_map():
             # right_image_block(x, y)
 
     print(disparity_map)
-    plt.imshow(disparity_map, cmap='hot', interpolation='nearest')
-    plt.savefig('depth_image.png')
+
+    plt.imshow(disparity_map, cmap='gray', interpolation='nearest')
+    plt.savefig('depth_image_gray.png')
     plt.show()
     # img = Image.fromarray(disparity_map, 'L')
     # img.show()
