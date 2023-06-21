@@ -14,18 +14,18 @@ def getDisparity(imgLeft, imgRight, method):
         sbm = cv2.StereoBM_create()
         sbm.setMinDisparity(16)  
         #defalt 16
-        sbm.setNumDisparities(32)
+        #sbm.setNumDisparities(32)
         #defalt 32
-        sbm.setBlockSize(19)
+        sbm.setBlockSize(15)
         #defalt 17
-        sbm.setDisp12MaxDiff(0)
-        #defalt  0
-        sbm.setUniquenessRatio(0)
-        #defalt 10
-        sbm.setSpeckleRange(128)
-        #defalt 16
-        sbm.setSpeckleWindowSize(8192)
-        #defalt 100
+        # sbm.setDisp12MaxDiff(0)
+        # #defalt  0
+        # sbm.setUniquenessRatio(0)
+        # #defalt 10
+        # sbm.setSpeckleRange(128)
+        # #defalt 16
+        # sbm.setSpeckleWindowSize(8192)
+        # #defalt 100
         disparity = sbm.compute(gray_left, gray_right)
         disparity_visual = cv2.normalize(disparity, None, alpha=0, beta=255, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_8U)
     elif method == "SGBM":
@@ -61,19 +61,19 @@ def getDisparity(imgLeft, imgRight, method):
         disparity_visual = cv2.normalize(disparity, None, alpha=0, beta=255, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_8U)
     return disparity_visual
 #두 영상의 이미지가 너무 멀면 disparity가 생성이 되지않아 이상한 영상이 출력된다.
-imgLeft = cv2.imread("./imgs/aloe3_exp0.png")
-imgRight = cv2.imread("./imgs/aloe4_exp0.png")
+imgLeft = cv2.imread("../imgs/aloe3_exp0.png")
+imgRight = cv2.imread("../imgs/aloe4_exp0.png")
 try:
     method = sys.argv[3]
 except IndexError:
-    method = "SGBM"
+    method = "BM"
 
 
 disparity = getDisparity(imgLeft, imgRight, method)
 
 plt.figure(figsize=(12,10))
 plt.imshow(disparity,cmap='gray')
-plt.title("SGBM_disparity")
+plt.title("BM_disparity_basic")
 plt.axis('off')
 plt.show()
 # cv2.imshow("disparity", disparity)
